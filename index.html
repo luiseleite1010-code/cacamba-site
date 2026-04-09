@@ -523,7 +523,9 @@ footer { background: #1a1a1a; padding: 28px 5%; display: flex; align-items: cent
   <div style="color:#555;font-size:12px;">© 2025 CaçambaFácil. CNPJ 12.345.678/0001-90</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
 const state = { sizePrice: 350, sizeName: 'Pequena 3m³', periodDays: 3, periodExtra: 0 };
 
 // Set min date to tomorrow
@@ -775,4 +777,13 @@ function confirmPayment() {
     `<strong>Caçamba:</strong> ${state.sizeName}<br>
     <strong>Período:</strong> ${state.periodDays} dias<br>
     <strong>Endereço de entrega:</strong> ${addr}<br>
-    <strong>Entrega prevista:</strong> ${dat
+    <strong>Entrega prevista:</strong> ${dateStr}<br>
+    <strong>Taxa de entrega paga agora:</strong> R$ 49,99<br><strong>Locação da caçamba (na entrega):</strong> <span id='successCacambaVal'></span>`;
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+}); // end DOMContentLoaded
+</script>
+</body>
+</html>
