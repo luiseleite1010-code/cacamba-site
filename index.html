@@ -6,249 +6,247 @@
 <title>CaçambaFácil — Locação Online</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --orange: #1565c0; --orange-dark: #0d47a1; --orange-light: #e3f0ff;
-  --text: #1a1a1a; --text-muted: #6b6b6b; --bg: #f5f4f0;
-  --white: #ffffff; --border: #e0ddd6; --radius: 14px;
-  --green: #f9a825; --green-light: #fff8e1;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1565c0;--blue-dark:#0d47a1;--blue-light:#e3f0ff;
+  --yellow:#f9a825;--yellow-light:#fff8e1;
+  --text:#1a1a1a;--muted:#6b6b6b;--bg:#f5f4f0;
+  --white:#fff;--border:#e0ddd6;--radius:14px;
+  --green:#2e7d32;--green-light:#e8f5e9;
 }
-body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.6; }
-
-header { background: #1a1a1a; padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 60px; position: sticky; top: 0; z-index: 200; }
-.logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--orange); letter-spacing: 1px; }
-.logo span { color: #fff; }
-.header-trust { color: #aaa; font-size: 13px; display: flex; align-items: center; gap: 6px; }
-.trust-dot { width: 7px; height: 7px; background: #fdd835; border-radius: 50%; display: inline-block; }
-
-.hero-strip { background: var(--orange); padding: 48px 5%; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-.hero-strip h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(38px, 5vw, 64px); color: #fff; letter-spacing: 1px; line-height: 1; }
-.hero-strip p { color: rgba(255,255,255,0.88); font-size: 16px; margin-top: 8px; max-width: 460px; }
-.hero-badges { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
-.badge { background: rgba(255,255,255,0.18); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; }
-.hero-stat { text-align: center; color: #fff; }
-.hero-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; line-height: 1; color: #fdd835; }
-.hero-stat-label { font-size: 13px; opacity: 0.8; }
-
-.main { max-width: 1100px; margin: 0 auto; padding: 48px 5% 80px; display: grid; grid-template-columns: 1fr 380px; gap: 32px; align-items: start; }
-
-.steps-tracker { display: flex; margin-bottom: 28px; }
-.step-tab { flex: 1; padding: 12px 8px; text-align: center; font-size: 13px; font-weight: 600; color: var(--text-muted); border-bottom: 3px solid var(--border); transition: all 0.2s; }
-.step-tab.active { color: var(--orange); border-bottom-color: var(--orange); }
-.step-tab.done { color: #f9a825; border-bottom-color: #f9a825; }
-.step-tab-num { display: block; font-size: 11px; font-weight: 400; margin-top: 2px; }
-
-.form-panel { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
-.panel-header { padding: 22px 28px; border-bottom: 1px solid var(--border); }
-.panel-header h2 { font-size: 18px; font-weight: 600; }
-.panel-header p { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
-.panel-body { padding: 28px; }
-
-.form-row { display: grid; gap: 16px; margin-bottom: 16px; }
-.form-row.cols-2 { grid-template-columns: 1fr 1fr; }
-.form-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
-.field { display: flex; flex-direction: column; gap: 6px; }
-.field label { font-size: 13px; font-weight: 600; color: var(--text); }
-.field input, .field select, .field textarea { border: 1.5px solid var(--border); border-radius: 8px; padding: 11px 14px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--text); background: var(--white); outline: none; transition: border-color 0.2s; width: 100%; }
-.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--orange); }
-.field input.error, .field select.error { border-color: #e53935; }
-.field .hint { font-size: 12px; color: var(--text-muted); }
-.field .err-msg { font-size: 12px; color: #e53935; display: none; }
-.field input.error ~ .err-msg, .field select.error ~ .err-msg { display: block; }
-
-.size-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
-.size-opt { display: flex; align-items: center; gap: 16px; border: 1.5px solid var(--border); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
-.size-opt:hover { border-color: var(--orange); background: var(--orange-light); }
-.size-opt.selected { border-color: var(--orange); background: var(--orange-light); }
-.size-opt input[type="radio"] { accent-color: var(--orange); width: 18px; height: 18px; flex-shrink: 0; }
-.size-opt-info { flex: 1; }
-.size-opt-name { font-weight: 600; font-size: 15px; }
-.size-opt-desc { font-size: 13px; color: var(--text-muted); }
-.size-opt-price { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #f9a825; font-weight: 700; }
-
-.period-opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
-.period-opt { border: 1.5px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.2s; }
-.period-opt:hover { border-color: var(--orange); }
-.period-opt.selected { border-color: var(--orange); background: var(--orange-light); }
-.period-opt input { display: none; }
-.period-opt-days { font-weight: 700; font-size: 20px; color: var(--text); }
-.period-opt-label { font-size: 12px; color: var(--text-muted); }
-.period-opt-price { font-size: 12px; color: #f9a825; font-weight: 600; margin-top: 2px; }
-
-.panel-footer { padding: 20px 28px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-.btn-back { background: transparent; border: 1.5px solid var(--border); color: var(--text-muted); padding: 11px 22px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 15px; cursor: pointer; transition: all 0.2s; }
-.btn-back:hover { border-color: #999; color: var(--text); }
-.btn-next { background: var(--orange); color: #fff; border: none; padding: 13px 28px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s; }
-.btn-next:hover { background: var(--orange-dark); transform: translateY(-1px); }
-
-.summary-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; position: sticky; top: 76px; }
-.summary-header { background: #1a1a1a; padding: 18px 22px; }
-.summary-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--white); letter-spacing: 0.5px; }
-.summary-body { padding: 20px 22px; }
-.summary-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); gap: 8px; }
-.summary-row:last-child { border-bottom: none; }
-.summary-label { font-size: 13px; color: var(--text-muted); }
-.summary-value { font-size: 14px; font-weight: 600; text-align: right; max-width: 55%; }
-.summary-value.pending { color: #bbb; font-style: italic; font-weight: 400; }
-.summary-total { padding: 16px 22px; border-top: 2px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: #fafaf8; }
-.summary-total-label { font-weight: 600; font-size: 15px; }
-.summary-total-value { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: #f9a825; }
-.pix-badge { display: flex; align-items: center; gap: 10px; padding: 12px 22px; background: var(--green-light); border-top: 1px solid #ffe082; }
-.pix-badge-text { font-size: 13px; color: #7b5800; font-weight: 500; }
-.trust-strip { border-top: 1px solid var(--border); padding: 16px 22px; display: flex; flex-direction: column; gap: 8px; }
-.trust-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); }
-.guarantee { padding: 14px 22px; display: flex; align-items: flex-start; gap: 10px; border-top: 1px solid var(--border); }
-.guarantee-text { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
-
-/* PIX SCREEN */
-.pix-screen { padding: 32px 28px; text-align: center; }
-.pix-total-display { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: #f9a825; }
-.pix-qr { width: 196px; height: 196px; margin: 20px auto; background: #fff; border-radius: 12px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; padding: 10px; }
-.pix-key-box { background: #fafaf8; border: 1px dashed var(--border); border-radius: 10px; padding: 14px 18px; margin: 16px 0; }
-.pix-key-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 4px; }
-.pix-key-value { font-size: 15px; font-weight: 600; word-break: break-all; }
-.btn-copy { background: var(--orange-light); color: var(--orange-dark); border: 1.5px solid var(--orange); border-radius: 8px; padding: 10px 22px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-bottom: 16px; }
-.btn-copy:hover { background: var(--orange); color: #fff; }
-.pix-timer { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
-.pix-timer span { font-weight: 700; color: #e53935; }
-.pix-steps-list { text-align: left; background: #fafaf8; border-radius: 10px; padding: 16px 18px; margin-bottom: 20px; }
-.pix-step-item { display: flex; align-items: flex-start; gap: 10px; padding: 5px 0; font-size: 14px; color: var(--text-muted); }
-.pix-step-num { width: 22px; height: 22px; background: var(--orange); border-radius: 50%; color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-.btn-confirm-pix { background: var(--orange); color: #fff; border: none; padding: 14px 28px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; width: 100%; transition: background 0.2s; }
-.btn-confirm-pix:hover { background: var(--orange-dark); }
-
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6}
+/* HEADER */
+header{background:#1a1a1a;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:200}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--blue);letter-spacing:1px}
+.logo span{color:#fff}
+.header-trust{color:#aaa;font-size:13px;display:flex;align-items:center;gap:6px}
+.dot{width:7px;height:7px;background:#fdd835;border-radius:50%;display:inline-block}
+/* HERO */
+.hero{background:var(--blue);padding:48px 5%;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,5vw,64px);color:#fff;line-height:1}
+.hero p{color:rgba(255,255,255,.88);font-size:16px;margin-top:8px;max-width:460px}
+.badges{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.badge{background:rgba(255,255,255,.18);color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:500}
+.stat{text-align:center;color:#fff}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;color:#fdd835}
+.stat-label{font-size:13px;opacity:.8}
+/* NOTICE */
+.notice{background:#fff8e1;border-bottom:2px solid var(--yellow);padding:14px 5%;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;text-align:center}
+.notice p{font-size:15px;color:#5d4037;margin:0}
+/* MAIN LAYOUT */
+.main{max-width:1100px;margin:0 auto;padding:48px 5% 80px;display:grid;grid-template-columns:1fr 380px;gap:32px;align-items:start}
+/* STEPS TRACKER */
+.tracker{display:flex;margin-bottom:28px}
+.tab{flex:1;padding:12px 8px;text-align:center;font-size:13px;font-weight:600;color:var(--muted);border-bottom:3px solid var(--border);transition:all .2s}
+.tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.tab.done{color:var(--green);border-bottom-color:var(--green)}
+.tab small{display:block;font-size:11px;font-weight:400;margin-top:2px}
+/* PANELS */
+.panel{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden}
+.panel-head{padding:22px 28px;border-bottom:1px solid var(--border)}
+.panel-head h2{font-size:18px;font-weight:600}
+.panel-head p{font-size:14px;color:var(--muted);margin-top:4px}
+.panel-body{padding:28px}
+.panel-foot{padding:20px 28px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+/* FORM */
+.row{display:grid;gap:16px;margin-bottom:16px}
+.row.c2{grid-template-columns:1fr 1fr}
+.row.c3{grid-template-columns:1fr 1fr 1fr}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:13px;font-weight:600}
+.field input,.field select,.field textarea{border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--text);background:var(--white);outline:none;transition:border-color .2s;width:100%}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue)}
+.field input.err{border-color:#e53935}
+.errmsg{font-size:12px;color:#e53935;display:none}
+.field input.err~.errmsg,.field select.err~.errmsg{display:block}
+.hint{font-size:12px;color:var(--muted)}
+/* SIZE OPTIONS */
+.sizes{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.size-opt{display:flex;align-items:center;gap:16px;border:1.5px solid var(--border);border-radius:10px;padding:14px 18px;cursor:pointer;transition:all .2s}
+.size-opt:hover,.size-opt.sel{border-color:var(--blue);background:var(--blue-light)}
+.size-opt input{accent-color:var(--blue);width:18px;height:18px;flex-shrink:0}
+.size-info{flex:1}
+.size-name{font-weight:600;font-size:15px}
+.size-desc{font-size:13px;color:var(--muted)}
+.size-price{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--yellow)}
+/* PERIOD */
+.periods{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.per-opt{border:1.5px solid var(--border);border-radius:8px;padding:10px;text-align:center;cursor:pointer;transition:all .2s}
+.per-opt:hover,.per-opt.sel{border-color:var(--blue);background:var(--blue-light)}
+.per-opt input{display:none}
+.per-days{font-weight:700;font-size:20px}
+.per-label{font-size:12px;color:var(--muted)}
+.per-price{font-size:12px;color:var(--blue);font-weight:600;margin-top:2px}
+/* BUTTONS */
+.btn-back{background:transparent;border:1.5px solid var(--border);color:var(--muted);padding:11px 22px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:15px;cursor:pointer;transition:all .2s}
+.btn-back:hover{border-color:#999;color:var(--text)}
+.btn-next{background:var(--blue);color:#fff;border:none;padding:13px 28px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-next:hover{background:var(--blue-dark);transform:translateY(-1px)}
+/* SUMMARY */
+.summary{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;position:sticky;top:76px}
+.sum-head{background:#1a1a1a;padding:18px 22px}
+.sum-head h3{font-family:'Bebas Neue',sans-serif;font-size:20px;color:#fff}
+.sum-body{padding:20px 22px}
+.sum-row{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);gap:8px}
+.sum-row:last-child{border-bottom:none}
+.sum-lbl{font-size:13px;color:var(--muted)}
+.sum-val{font-size:14px;font-weight:600;text-align:right;max-width:55%}
+.sum-val.pend{color:#bbb;font-style:italic;font-weight:400}
+.sum-total{padding:16px 22px;border-top:2px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:#fafaf8}
+.sum-total-lbl{font-weight:600;font-size:15px}
+.sum-total-val{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--yellow)}
+.sum-notice{padding:12px 22px;background:var(--blue-light);border-top:1px solid #90caf9}
+.sum-notice p{font-size:13px;color:var(--blue-dark);font-weight:600;margin-bottom:2px}
+.sum-notice small{font-size:12px;color:var(--blue)}
+.pix-badge{display:flex;align-items:center;gap:10px;padding:12px 22px;background:var(--green-light);border-top:1px solid #c8e6c9}
+.pix-badge-text{font-size:13px;color:var(--green);font-weight:500}
+.trust{border-top:1px solid var(--border);padding:16px 22px;display:flex;flex-direction:column;gap:8px}
+.trust-item{font-size:13px;color:var(--muted)}
+.guarantee{padding:14px 22px;display:flex;align-items:flex-start;gap:10px;border-top:1px solid var(--border)}
+.guarantee p{font-size:12px;color:var(--muted);line-height:1.5}
+/* PIX */
+.pix-screen{padding:28px}
+.pix-loading{padding:40px 0;text-align:center;display:none}
+.spinner{width:48px;height:48px;border:4px solid var(--blue-light);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pix-error{display:none;background:#fff0f0;border:1.5px solid #ffcdd2;border-radius:10px;padding:16px 18px;margin-bottom:16px;text-align:left}
+.pix-content{display:none;text-align:center}
+.pix-amount{font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--yellow)}
+.pix-timer{font-size:13px;color:var(--muted);margin:6px 0 16px}
+.pix-timer span{font-weight:700;color:#e53935}
+.qr-box{width:196px;height:196px;margin:0 auto 16px;background:#fff;border-radius:12px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:10px}
+.key-box{background:#fafaf8;border:1px dashed var(--border);border-radius:10px;padding:14px 18px;margin:16px 0;text-align:left}
+.key-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:4px}
+.key-val{font-size:13px;font-weight:600;word-break:break-all}
+.btn-copy{background:var(--blue-light);color:var(--blue-dark);border:1.5px solid var(--blue);border-radius:8px;padding:10px 22px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;margin-bottom:16px}
+.btn-copy:hover{background:var(--blue);color:#fff}
+.steps-list{text-align:left;background:#fafaf8;border-radius:10px;padding:16px 18px;margin-bottom:20px}
+.step-item{display:flex;align-items:flex-start;gap:10px;padding:5px 0;font-size:14px;color:var(--muted)}
+.step-num{width:22px;height:22px;background:var(--blue);border-radius:50%;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.btn-confirm{background:var(--blue);color:#fff;border:none;padding:14px 28px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;width:100%;transition:all .2s}
+.btn-confirm:hover{background:var(--blue-dark)}
 /* SUCCESS */
-.success-screen { text-align: center; padding: 48px 28px; }
-.success-icon { width: 80px; height: 80px; background: #fff8e1; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 38px; margin: 0 auto 20px; }
-.success-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: #f9a825; margin-bottom: 8px; }
-.success-msg { font-size: 15px; color: var(--text-muted); max-width: 340px; margin: 0 auto 24px; }
-.order-code { background: #fafaf8; border: 1px solid var(--border); border-radius: 10px; padding: 16px; display: inline-block; margin-bottom: 24px; }
-.order-code-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-.order-code-value { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: #f9a825; letter-spacing: 2px; }
-.success-details { text-align: left; background: #fafaf8; border-radius: 10px; padding: 18px; font-size: 14px; color: var(--text-muted); line-height: 2; }
-
-.perks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-.perk { background: #252525; border: 1px solid #333; border-radius: var(--radius); padding: 22px 20px; text-align: center; }
-.perk-icon { font-size: 28px; margin-bottom: 10px; }
-.perk h4 { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 6px; }
-.perk p { font-size: 13px; color: #888; }
-
-footer { background: #1a1a1a; padding: 28px 5%; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--orange); }
-
-@media (max-width: 800px) {
-  .main { grid-template-columns: 1fr; }
-  .summary-card { position: static; }
-  .perks { grid-template-columns: repeat(2, 1fr); }
-  .form-row.cols-2, .form-row.cols-3 { grid-template-columns: 1fr; }
+.success-screen{text-align:center;padding:48px 28px}
+.success-icon{width:80px;height:80px;background:var(--green-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:38px;margin:0 auto 20px}
+.success-title{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--yellow);margin-bottom:8px}
+.success-msg{font-size:15px;color:var(--muted);max-width:340px;margin:0 auto 24px}
+.order-code{background:#fafaf8;border:1px solid var(--border);border-radius:10px;padding:16px;display:inline-block;margin-bottom:24px}
+.order-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.order-val{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--yellow);letter-spacing:2px}
+.success-details{text-align:left;background:#fafaf8;border-radius:10px;padding:18px;font-size:14px;color:var(--muted);line-height:2}
+/* WHY */
+.why{background:#1a1a1a;padding:60px 5%}
+.why-inner{max-width:1100px;margin:0 auto}
+.section-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--blue);margin-bottom:10px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,48px);color:#fff;margin-bottom:32px}
+.perks{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.perk{background:#252525;border:1px solid #333;border-radius:var(--radius);padding:22px 20px;text-align:center}
+.perk-icon{font-size:28px;margin-bottom:10px}
+.perk h4{font-size:14px;font-weight:600;color:#fff;margin-bottom:6px}
+.perk p{font-size:13px;color:#888}
+/* FOOTER */
+footer{background:#1a1a1a;padding:28px 5%;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--blue)}
+/* RESPONSIVE */
+@media(max-width:800px){
+  .main{grid-template-columns:1fr}
+  .summary{position:static}
+  .perks{grid-template-columns:repeat(2,1fr)}
+  .row.c2,.row.c3{grid-template-columns:1fr}
 }
+/* INFO BOX */
+.info-box{background:var(--blue-light);border:1.5px solid #90caf9;border-radius:10px;padding:14px 18px;margin-bottom:20px;text-align:left}
+.info-box p:first-child{font-size:14px;color:var(--blue-dark);font-weight:600;margin-bottom:4px}
+.info-box p:last-child{font-size:13px;color:var(--blue);line-height:1.6}
+.warn-box{background:var(--blue-light);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--blue-dark);margin-top:4px}
 </style>
 </head>
 <body>
 
 <header>
   <div class="logo">Caçamba<span>Fácil</span></div>
-  <div class="header-trust"><span class="trust-dot"></span> Compra 100% segura e online</div>
+  <div class="header-trust"><span class="dot"></span> Compra 100% segura e online</div>
 </header>
 
-<div class="hero-strip">
+<div class="hero">
   <div>
     <h1>Alugue sua caçamba<br>agora, direto aqui</h1>
     <p>Escolha o tamanho, informe o endereço e pague via Pix. Entregamos em até 24h.</p>
-    <div class="hero-badges">
+    <div class="badges">
       <span class="badge">⚡ Entrega em 24h</span>
       <span class="badge">🔒 Pix seguro</span>
       <span class="badge">♻️ Descarte correto</span>
     </div>
   </div>
-  <div style="display:flex;gap:36px;flex-wrap:wrap;">
-    <div class="hero-stat"><div class="hero-stat-num">+1.200</div><div class="hero-stat-label">Pedidos realizados</div></div>
-    <div class="hero-stat"><div class="hero-stat-num">4.9★</div><div class="hero-stat-label">Avaliação média</div></div>
+  <div style="display:flex;gap:36px;flex-wrap:wrap">
+    <div class="stat"><div class="stat-num">+1.200</div><div class="stat-label">Pedidos realizados</div></div>
+    <div class="stat"><div class="stat-num">4.9★</div><div class="stat-label">Avaliação média</div></div>
   </div>
 </div>
 
-
-<div style="background:#fff8e1;border-bottom:2px solid #f9a825;padding:14px 5%;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;">
-  <span style="font-size:20px;">ℹ️</span>
-  <p style="font-size:15px;color:#5d4037;margin:0;text-align:center;">
-    <strong style="color:#1565c0;">Cobramos apenas R$ 49,99 agora</strong> — valor da entrega para reservar seu pedido.
-    O restante (locação da caçamba) <strong>será acordado e pago na entrega.</strong>
-  </p>
+<div class="notice">
+  <span style="font-size:20px">ℹ️</span>
+  <p><strong style="color:var(--blue)">Cobramos apenas R$ 49,99 agora</strong> — taxa de entrega para reservar seu pedido. O valor da caçamba <strong>é pago na entrega.</strong></p>
 </div>
 
 <div class="main">
   <div>
-    <!-- Steps Tracker -->
-    <div class="steps-tracker" id="stepsTracker">
-      <div class="step-tab active" id="tab1">Caçamba<span class="step-tab-num">Passo 1</span></div>
-      <div class="step-tab" id="tab2">Entrega<span class="step-tab-num">Passo 2</span></div>
-      <div class="step-tab" id="tab3">Pagamento<span class="step-tab-num">Passo 3</span></div>
+    <!-- TRACKER -->
+    <div class="tracker">
+      <div class="tab active" id="tab1">Caçamba<small>Passo 1</small></div>
+      <div class="tab" id="tab2">Entrega<small>Passo 2</small></div>
+      <div class="tab" id="tab3">Pagamento<small>Passo 3</small></div>
     </div>
 
     <!-- STEP 1 -->
-    <div class="form-panel" id="step1">
-      <div class="panel-header">
+    <div class="panel" id="step1">
+      <div class="panel-head">
         <h2>Escolha a caçamba</h2>
         <p>Selecione o tamanho e o período de locação</p>
       </div>
       <div class="panel-body">
-        <p style="font-size:13px;font-weight:600;margin-bottom:12px;">Tamanho da caçamba</p>
-        <div class="size-options">
-          <label class="size-opt selected">
+        <p style="font-size:13px;font-weight:600;margin-bottom:12px">Tamanho da caçamba</p>
+        <div class="sizes">
+          <label class="size-opt sel">
             <input type="radio" name="size" value="pequena" data-price="350" data-name="Pequena 3m³" checked>
-            <div class="size-opt-info">
-              <div class="size-opt-name">Pequena — 3m³</div>
-              <div class="size-opt-desc">Reformas leves, limpeza de quintal — <strong style="color:#1565c0;">pago na entrega</strong></div>
+            <div class="size-info">
+              <div class="size-name">Pequena — 3m³</div>
+              <div class="size-desc">Reformas leves, limpeza de quintal — <strong style="color:var(--blue)">pago na entrega</strong></div>
             </div>
-            <div class="size-opt-price">R$ 350</div>
+            <div class="size-price">R$ 350</div>
           </label>
           <label class="size-opt">
             <input type="radio" name="size" value="media" data-price="490" data-name="Média 5m³">
-            <div class="size-opt-info">
-              <div class="size-opt-name">Média — 5m³</div>
-              <div class="size-opt-desc">Reformas de médio porte, banheiros, cozinhas — <strong style="color:#1565c0;">pago na entrega</strong></div>
+            <div class="size-info">
+              <div class="size-name">Média — 5m³</div>
+              <div class="size-desc">Reformas de médio porte, banheiros, cozinhas — <strong style="color:var(--blue)">pago na entrega</strong></div>
             </div>
-            <div class="size-opt-price">R$ 490</div>
+            <div class="size-price">R$ 490</div>
           </label>
           <label class="size-opt">
             <input type="radio" name="size" value="grande" data-price="680" data-name="Grande 7m³">
-            <div class="size-opt-info">
-              <div class="size-opt-name">Grande — 7m³</div>
-              <div class="size-opt-desc">Construções, demolições e grandes volumes — <strong style="color:#1565c0;">pago na entrega</strong></div>
+            <div class="size-info">
+              <div class="size-name">Grande — 7m³</div>
+              <div class="size-desc">Construções, demolições e grandes volumes — <strong style="color:var(--blue)">pago na entrega</strong></div>
             </div>
-            <div class="size-opt-price">R$ 680</div>
+            <div class="size-price">R$ 680</div>
           </label>
         </div>
 
-        <p style="font-size:13px;font-weight:600;margin-bottom:12px;margin-top:8px;">Período de locação</p>
-        <div class="period-opts">
-          <label class="period-opt selected">
-            <input type="radio" name="period" value="3" data-extra="0" checked>
-            <div class="period-opt-days">3</div>
-            <div class="period-opt-label">dias</div>
-            <div class="period-opt-price">incluso</div>
-          </label>
-          <label class="period-opt">
-            <input type="radio" name="period" value="5" data-extra="80">
-            <div class="period-opt-days">5</div>
-            <div class="period-opt-label">dias</div>
-            <div class="period-opt-price">incluso</div>
-          </label>
-          <label class="period-opt">
-            <input type="radio" name="period" value="7" data-extra="150">
-            <div class="period-opt-days">7</div>
-            <div class="period-opt-label">dias</div>
-            <div class="period-opt-price">incluso</div>
-          </label>
+        <p style="font-size:13px;font-weight:600;margin-bottom:12px;margin-top:8px">Período de locação</p>
+        <div class="periods">
+          <label class="per-opt sel"><input type="radio" name="period" value="3" checked><div class="per-days">3</div><div class="per-label">dias</div><div class="per-price">incluso</div></label>
+          <label class="per-opt"><input type="radio" name="period" value="5"><div class="per-days">5</div><div class="per-label">dias</div><div class="per-price">incluso</div></label>
+          <label class="per-opt"><input type="radio" name="period" value="7"><div class="per-days">7</div><div class="per-label">dias</div><div class="per-price">incluso</div></label>
         </div>
 
-        <div class="form-row">
+        <div class="row">
           <div class="field">
             <label>Data de entrega desejada</label>
             <input type="date" id="deliveryDate">
           </div>
         </div>
-        <div class="form-row">
+        <div class="row">
           <div class="field">
             <label>Tipo de material a descartar</label>
             <select id="materialType">
@@ -261,253 +259,204 @@ footer { background: #1a1a1a; padding: 28px 5%; display: flex; align-items: cent
             </select>
           </div>
         </div>
-        <div class="form-row">
+        <div class="row">
           <div class="field">
             <label>Observações (opcional)</label>
             <textarea id="obs" rows="2" placeholder="Ex: portão largo, condomínio, posicionar à esquerda..."></textarea>
           </div>
         </div>
       </div>
-      <div class="panel-footer">
-        <span style="font-size:13px;color:var(--text-muted);">Passo 1 de 3</span>
-        <button class="btn-next" onclick="goStep(2)">Continuar →</button>
+      <div class="panel-foot">
+        <span style="font-size:13px;color:var(--muted)">Passo 1 de 3</span>
+        <button class="btn-next" id="btnStep1">Continuar →</button>
       </div>
     </div>
 
     <!-- STEP 2 -->
-    <div class="form-panel" id="step2" style="display:none;">
-      <div class="panel-header">
+    <div class="panel" id="step2" style="display:none">
+      <div class="panel-head">
         <h2>Dados pessoais e entrega</h2>
-        <p>Preencha seus dados e o endereço de entrega da caçamba</p>
+        <p>Preencha seus dados e o endereço de entrega</p>
       </div>
       <div class="panel-body">
-        <p style="font-size:13px;font-weight:600;margin-bottom:12px;">Seus dados</p>
-        <div class="form-row cols-2">
+        <p style="font-size:13px;font-weight:600;margin-bottom:12px">Seus dados</p>
+        <div class="row c2">
           <div class="field">
             <label>Nome completo *</label>
             <input type="text" id="nome" placeholder="João da Silva">
-            <span class="err-msg">Campo obrigatório</span>
+            <span class="errmsg">Campo obrigatório</span>
           </div>
           <div class="field">
             <label>CPF *</label>
             <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14">
-            <span class="err-msg">Campo obrigatório</span>
+            <span class="errmsg">Campo obrigatório</span>
           </div>
         </div>
-        <div class="form-row cols-2">
+        <div class="row c2">
           <div class="field">
             <label>E-mail *</label>
             <input type="email" id="email" placeholder="joao@email.com">
-            <span class="err-msg">E-mail inválido</span>
+            <span class="errmsg">E-mail inválido</span>
           </div>
           <div class="field">
             <label>Telefone *</label>
             <input type="tel" id="telefone" placeholder="(11) 99999-9999" maxlength="15">
-            <span class="err-msg">Campo obrigatório</span>
+            <span class="errmsg">Campo obrigatório</span>
           </div>
         </div>
-
-        <p style="font-size:13px;font-weight:600;margin-bottom:12px;margin-top:8px;">Endereço de entrega</p>
-        <div class="form-row cols-2">
+        <p style="font-size:13px;font-weight:600;margin-bottom:12px;margin-top:8px">Endereço de entrega</p>
+        <div class="row c2">
           <div class="field">
             <label>CEP *</label>
-            <input type="text" id="cep" placeholder="00000-000" maxlength="9" oninput="buscarCEP(this)">
+            <input type="text" id="cep" placeholder="00000-000" maxlength="9">
             <span class="hint">Preenche o endereço automaticamente</span>
-            <span class="err-msg">CEP inválido</span>
+            <span class="errmsg">CEP inválido</span>
           </div>
           <div class="field">
             <label>Estado (UF)</label>
             <input type="text" id="uf" placeholder="SP" maxlength="2">
           </div>
         </div>
-        <div class="form-row">
+        <div class="row">
           <div class="field">
             <label>Rua / Logradouro *</label>
             <input type="text" id="rua" placeholder="Rua das Flores">
-            <span class="err-msg">Campo obrigatório</span>
+            <span class="errmsg">Campo obrigatório</span>
           </div>
         </div>
-        <div class="form-row cols-2">
+        <div class="row c2">
           <div class="field">
             <label>Número *</label>
             <input type="text" id="numero" placeholder="123">
-            <span class="err-msg">Campo obrigatório</span>
+            <span class="errmsg">Campo obrigatório</span>
           </div>
           <div class="field">
             <label>Complemento</label>
-            <input type="text" id="complemento" placeholder="Apto, bloco, fundos...">
+            <input type="text" id="complemento" placeholder="Apto, bloco...">
           </div>
         </div>
-        <div class="form-row cols-2">
+        <div class="row c2">
           <div class="field">
             <label>Bairro *</label>
             <input type="text" id="bairro" placeholder="Centro">
-            <span class="err-msg">Campo obrigatório</span>
+            <span class="errmsg">Campo obrigatório</span>
           </div>
           <div class="field">
             <label>Cidade *</label>
             <input type="text" id="cidade" placeholder="São Paulo">
-            <span class="err-msg">Campo obrigatório</span>
+            <span class="errmsg">Campo obrigatório</span>
           </div>
         </div>
-        <div style="background:var(--orange-light);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--orange-dark);margin-top:4px;">
-          🚛 <strong>Cobertura:</strong> São Paulo e Grande SP. Dúvidas? Ligue (11) 3333-3333.
-        </div>
+        <div class="warn-box">🚛 <strong>Cobertura:</strong> São Paulo e Grande SP. Dúvidas? Ligue (11) 3333-3333.</div>
       </div>
-      <div class="panel-footer">
-        <button class="btn-back" onclick="goStep(1)">← Voltar</button>
-        <button class="btn-next" onclick="validateStep2()">Ir para pagamento →</button>
+      <div class="panel-foot">
+        <button class="btn-back" id="btnBack2">← Voltar</button>
+        <button class="btn-next" id="btnStep2">Ir para pagamento →</button>
       </div>
     </div>
 
-    <!-- STEP 3: PIX -->
-    <div class="form-panel" id="step3" style="display:none;">
-      <div class="panel-header">
+    <!-- STEP 3 -->
+    <div class="panel" id="step3" style="display:none">
+      <div class="panel-head">
         <h2>Pagamento via Pix</h2>
-        <p>Escaneie o QR Code ou copie a chave para pagar</p>
+        <p>Escaneie o QR Code ou copie o código para pagar</p>
       </div>
       <div class="pix-screen">
-
-        <!-- AVISO DO QUE ESTÁ SENDO COBRADO -->
-        <div style="background:#e3f0ff;border:1.5px solid #90caf9;border-radius:10px;padding:14px 18px;margin-bottom:22px;text-align:left;">
-          <p style="font-size:14px;color:#0d47a1;font-weight:600;margin-bottom:4px;">ℹ️ O que você está pagando agora</p>
-          <p style="font-size:13px;color:#1565c0;line-height:1.6;">Apenas a <strong>taxa de entrega (R$ 49,99)</strong> para confirmar sua reserva. O valor da locação da caçamba é pago na entrega.</p>
+        <div class="info-box">
+          <p>ℹ️ O que você está pagando agora</p>
+          <p>Apenas a <strong>taxa de entrega (R$ 49,99)</strong> para confirmar sua reserva. O valor da caçamba é pago na entrega.</p>
         </div>
-
-        <!-- LOADING STATE -->
-        <div id="pixLoading" style="padding:40px 0;display:none;">
-          <div style="width:48px;height:48px;border:4px solid #e3f0ff;border-top-color:#1565c0;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px;"></div>
-          <p style="font-size:14px;color:var(--text-muted);">Gerando seu Pix...</p>
+        <div class="pix-loading" id="pixLoading">
+          <div class="spinner"></div>
+          <p style="font-size:14px;color:var(--muted)">Gerando seu Pix...</p>
         </div>
-
-        <!-- ERROR STATE -->
-        <div id="pixError" style="display:none;background:#fff0f0;border:1.5px solid #ffcdd2;border-radius:10px;padding:16px 18px;margin-bottom:16px;text-align:left;">
-          <p style="font-size:14px;color:#c62828;font-weight:600;margin-bottom:4px;">❌ Erro ao gerar o Pix</p>
-          <p style="font-size:13px;color:#b71c1c;" id="pixErrorMsg">Tente novamente.</p>
-          <button onclick="gerarPix()" style="margin-top:10px;background:#1565c0;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">↺ Tentar novamente</button>
+        <div class="pix-error" id="pixError">
+          <p style="font-size:14px;color:#c62828;font-weight:600;margin-bottom:4px">❌ Erro ao gerar o Pix</p>
+          <p style="font-size:13px;color:#b71c1c" id="pixErrMsg">Tente novamente.</p>
+          <button onclick="gerarPix()" style="margin-top:10px;background:var(--blue);color:#fff;border:none;padding:8px 18px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer">↺ Tentar novamente</button>
         </div>
-
-        <!-- PIX CONTENT (shown after API success) -->
-        <div id="pixContent" style="display:none;">
-          <div class="pix-total-display" id="pixTotal">R$ 49,99</div>
-          <p style="font-size:14px;color:var(--text-muted);margin-bottom:8px;">Taxa de entrega — reserva do pedido</p>
+        <div class="pix-content" id="pixContent">
+          <div class="pix-amount">R$ 49,99</div>
+          <p style="font-size:14px;color:var(--muted);margin-bottom:4px">Taxa de entrega — reserva do pedido</p>
           <div class="pix-timer">QR Code expira em: <span id="countdown">24:00:00</span></div>
-
-          <!-- QR CODE IMAGEM REAL -->
-          <div class="pix-qr" id="pixQrBox">
-            <img id="pixQrImg" src="" alt="QR Code Pix" style="width:170px;height:170px;display:none;border-radius:8px;">
+          <div class="qr-box">
+            <img id="pixQrImg" src="" alt="QR Code Pix" style="width:170px;height:170px;border-radius:8px;display:none">
           </div>
-
-          <div class="pix-key-box">
-            <div class="pix-key-label">Pix Copia e Cola</div>
-            <div class="pix-key-value" id="pixCopiaCola" style="font-size:12px;word-break:break-all;max-height:60px;overflow:hidden;">—</div>
+          <div class="key-box">
+            <div class="key-label">Pix Copia e Cola</div>
+            <div class="key-val" id="pixKey">—</div>
           </div>
-
-          <button class="btn-copy" id="btnCopy" onclick="copyPix()">📋 Copiar código Pix</button>
-
-          <div class="pix-steps-list">
-            <div class="pix-step-item"><div class="pix-step-num">1</div><span>Abra o app do seu banco e vá em Pix → Pagar</span></div>
-            <div class="pix-step-item"><div class="pix-step-num">2</div><span>Escaneie o QR Code ou cole o código acima</span></div>
-            <div class="pix-step-item"><div class="pix-step-num">3</div><span>Confirme o valor de <strong>R$ 49,99</strong> e finalize</span></div>
+          <button class="btn-copy" id="btnCopy">📋 Copiar código Pix</button>
+          <div class="steps-list">
+            <div class="step-item"><div class="step-num">1</div><span>Abra o app do seu banco e vá em Pix → Pagar</span></div>
+            <div class="step-item"><div class="step-num">2</div><span>Escaneie o QR Code ou cole o código acima</span></div>
+            <div class="step-item"><div class="step-num">3</div><span>Confirme o valor de <strong>R$ 49,99</strong> e finalize</span></div>
           </div>
-
-          <button class="btn-confirm-pix" onclick="confirmPayment()">✅ Já realizei o pagamento</button>
-          <p style="font-size:12px;color:var(--text-muted);margin-top:14px;">Após o pagamento, confirmaremos seu pedido por e-mail em até 10 minutos.</p>
+          <button class="btn-confirm" id="btnConfirm">✅ Já realizei o pagamento</button>
+          <p style="font-size:12px;color:var(--muted);margin-top:14px">Confirmaremos seu pedido por e-mail em até 10 minutos.</p>
         </div>
-
-        <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
       </div>
-      <div class="panel-footer">
-        <button class="btn-back" onclick="goStep(2)">← Voltar</button>
-        <span style="font-size:13px;color:var(--text-muted);">🔒 Pagamento seguro</span>
+      <div class="panel-foot">
+        <button class="btn-back" id="btnBack3">← Voltar</button>
+        <span style="font-size:13px;color:var(--muted)">🔒 Pagamento seguro</span>
       </div>
     </div>
 
     <!-- SUCCESS -->
-    <div class="form-panel" id="stepSuccess" style="display:none;">
+    <div class="panel" id="stepSuccess" style="display:none">
       <div class="success-screen">
         <div class="success-icon">✅</div>
         <div class="success-title">Pedido confirmado!</div>
         <p class="success-msg">Recebemos seu pedido. Você receberá a confirmação por e-mail em até 10 minutos.</p>
         <div class="order-code">
-          <div class="order-code-label">Número do pedido</div>
-          <div class="order-code-value" id="orderNum">#CF-000000</div>
+          <div class="order-label">Número do pedido</div>
+          <div class="order-val" id="orderNum">#CF-000000</div>
         </div>
         <div class="success-details" id="successDetails"></div>
       </div>
     </div>
   </div>
 
-  <!-- SUMMARY SIDEBAR -->
+  <!-- SIDEBAR -->
   <div>
-    <div class="summary-card">
-      <div class="summary-header"><h3>Resumo do pedido</h3></div>
-      <div class="summary-body">
-        <div class="summary-row">
-          <span class="summary-label">Caçamba</span>
-          <span class="summary-value" id="sumSize">Pequena 3m³</span>
-        </div>
-        <div class="summary-row">
-          <span class="summary-label">Período</span>
-          <span class="summary-value" id="sumPeriod">3 dias</span>
-        </div>
-        <div class="summary-row">
-          <span class="summary-label">Data de entrega</span>
-          <span class="summary-value pending" id="sumDate">Não selecionada</span>
-        </div>
-        <div class="summary-row">
-          <span class="summary-label">Endereço</span>
-          <span class="summary-value pending" id="sumAddr">A preencher</span>
-        </div>
-        <div class="summary-row">
-          <span class="summary-label">Material</span>
-          <span class="summary-value pending" id="sumMaterial">Não informado</span>
-        </div>
+    <div class="summary">
+      <div class="sum-head"><h3>Resumo do pedido</h3></div>
+      <div class="sum-body">
+        <div class="sum-row"><span class="sum-lbl">Caçamba</span><span class="sum-val" id="sumSize">Pequena 3m³</span></div>
+        <div class="sum-row"><span class="sum-lbl">Período</span><span class="sum-val" id="sumPeriod">3 dias</span></div>
+        <div class="sum-row"><span class="sum-lbl">Data de entrega</span><span class="sum-val pend" id="sumDate">Não selecionada</span></div>
+        <div class="sum-row"><span class="sum-lbl">Endereço</span><span class="sum-val pend" id="sumAddr">A preencher</span></div>
+        <div class="sum-row"><span class="sum-lbl">Locação caçamba</span><span class="sum-val" id="sumCacamba" style="color:var(--muted);font-style:italic">R$ 350 — na entrega</span></div>
       </div>
-      <div style="padding:12px 22px 8px;border-top:1px solid var(--border);background:#fafaf8;">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;">
-          <span style="font-size:13px;color:var(--text-muted);">Locação da caçamba</span>
-          <span style="font-size:14px;font-weight:600;color:var(--text-muted);" id="sumCacamba">R$ 350</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-top:1px dashed var(--border);margin-top:4px;">
-          <span style="font-size:12px;color:#888;font-style:italic;">Pago na entrega</span>
-          <span style="font-size:12px;color:#888;font-style:italic;" id="sumEntrega">R$ 350</span>
-        </div>
+      <div class="sum-total">
+        <span class="sum-total-lbl">Cobrado agora</span>
+        <span class="sum-total-val">R$ 49,99</span>
       </div>
-      <div class="summary-total">
-        <span class="summary-total-label">Cobrado agora (entrega)</span>
-        <span class="summary-total-value" id="sumTotal">R$ 49,99</span>
-      </div>
-
-      <div style="padding:12px 22px;background:#e3f0ff;border-top:1px solid #90caf9;">
-        <p style="font-size:13px;color:#0d47a1;font-weight:600;margin-bottom:2px;">💳 Cobrado agora: R$ 49,99</p>
-        <p style="font-size:12px;color:#1565c0;">Taxa de entrega para reserva do pedido. O valor da locação é combinado e pago na entrega.</p>
+      <div class="sum-notice">
+        <p>💳 Apenas R$ 49,99 agora</p>
+        <small>Taxa de entrega. Locação paga na entrega.</small>
       </div>
       <div class="pix-badge">
-        <svg width="28" height="28" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-          <rect width="40" height="40" rx="6" fill="#1565c0"/>
-          <text x="20" y="26" text-anchor="middle" font-size="12" fill="white" font-weight="bold" font-family="sans-serif">PIX</text>
-        </svg>
+        <svg width="28" height="28" viewBox="0 0 40 40"><rect width="40" height="40" rx="6" fill="#1565c0"/><text x="20" y="26" text-anchor="middle" font-size="12" fill="white" font-weight="bold" font-family="sans-serif">PIX</text></svg>
         <span class="pix-badge-text">Pagamento seguro via Pix</span>
       </div>
-      <div class="trust-strip">
+      <div class="trust">
         <div class="trust-item">🔒 Seus dados estão protegidos</div>
         <div class="trust-item">📧 Nota fiscal enviada por e-mail</div>
         <div class="trust-item">🚛 Confirmação de entrega por SMS</div>
       </div>
       <div class="guarantee">
-        <span style="font-size:20px;">🛡️</span>
-        <p class="guarantee-text">Se não conseguirmos entregar na data combinada, devolvemos 100% do valor pago.</p>
+        <span style="font-size:20px">🛡️</span>
+        <p>Se não conseguirmos entregar na data combinada, devolvemos 100% do valor pago.</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- WHY US -->
-<div style="background:#1a1a1a;padding:60px 5%;">
-  <div style="max-width:1100px;margin:0 auto;">
-    <p style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--orange);margin-bottom:10px;">Por que a CaçambaFácil</p>
-    <p style="font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,48px);color:#fff;margin-bottom:32px;">Simples. Rápido. Sem burocracia.</p>
+<div class="why">
+  <div class="why-inner">
+    <p class="section-label">Por que a CaçambaFácil</p>
+    <p class="section-title">Simples. Rápido. Sem burocracia.</p>
     <div class="perks">
       <div class="perk"><div class="perk-icon">⚡</div><h4>Entrega em 24h</h4><p>Pedido confirmado hoje, caçamba entregue amanhã em SP e Grande SP</p></div>
       <div class="perk"><div class="perk-icon">💳</div><h4>Pix fácil e seguro</h4><p>Sem cartão, sem burocracia. Confirmação imediata após o pagamento</p></div>
@@ -519,271 +468,244 @@ footer { background: #1a1a1a; padding: 28px 5%; display: flex; align-items: cent
 
 <footer>
   <div class="footer-logo">CaçambaFácil</div>
-  <div style="color:#666;font-size:13px;">📞 (11) 3333-3333 &nbsp;|&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="32515d5c4653465d72515351535f50535453515b5e1c515d5f1c5040">[email&#160;protected]</a></div>
-  <div style="color:#555;font-size:12px;">© 2025 CaçambaFácil. CNPJ 12.345.678/0001-90</div>
+  <div style="color:#666;font-size:13px">📞 (11) 3333-3333 &nbsp;|&nbsp; contato@cacambafacil.com.br</div>
+  <div style="color:#555;font-size:12px">© 2025 CaçambaFácil. CNPJ 12.345.678/0001-90</div>
 </footer>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-
-const state = { sizePrice: 350, sizeName: 'Pequena 3m³', periodDays: 3, periodExtra: 0 };
-
-// Set min date to tomorrow
 (function() {
-  const d = new Date(); d.setDate(d.getDate() + 1);
-  const iso = d.toISOString().split('T')[0];
+  // STATE
+  var state = { sizePrice: 350, sizeName: 'Pequena 3m³', periodDays: 3, pixKey: '' };
+  var timerInterval = null;
+
+  // Set min date
+  var d = new Date(); d.setDate(d.getDate() + 1);
+  var iso = d.toISOString().split('T')[0];
   document.getElementById('deliveryDate').min = iso;
   document.getElementById('deliveryDate').value = iso;
   updateSumDate();
-})();
 
-// Size selection
-document.querySelectorAll('.size-opt').forEach(opt => {
-  opt.addEventListener('click', function() {
-    document.querySelectorAll('.size-opt').forEach(o => o.classList.remove('selected'));
-    this.classList.add('selected');
-    const r = this.querySelector('input');
-    r.checked = true;
-    state.sizePrice = +r.dataset.price;
-    state.sizeName = r.dataset.name;
-    updateTotal();
-    const el = document.getElementById('sumSize');
-    el.textContent = state.sizeName; el.classList.remove('pending');
-  });
-});
-
-// Period selection
-document.querySelectorAll('.period-opt').forEach(opt => {
-  opt.addEventListener('click', function() {
-    document.querySelectorAll('.period-opt').forEach(o => o.classList.remove('selected'));
-    this.classList.add('selected');
-    const r = this.querySelector('input');
-    r.checked = true;
-    state.periodDays = +r.value;
-    state.periodExtra = +r.dataset.extra;
-    updateTotal();
-    document.getElementById('sumPeriod').textContent = state.periodDays + ' dias';
-  });
-});
-
-document.getElementById('deliveryDate').addEventListener('change', updateSumDate);
-function updateSumDate() {
-  const v = document.getElementById('deliveryDate').value;
-  if (!v) return;
-  const [y,m,d] = v.split('-');
-  const el = document.getElementById('sumDate');
-  el.textContent = d+'/'+m+'/'+y; el.classList.remove('pending');
-}
-
-document.getElementById('materialType').addEventListener('change', function() {
-  if (!this.value) return;
-  const el = document.getElementById('sumMaterial');
-  el.textContent = this.value; el.classList.remove('pending');
-});
-
-function updateTotal() {
-  const fmt = 'R$ ' + state.sizePrice.toLocaleString('pt-BR');
-  const sc = document.getElementById('sumCacamba');
-  const se = document.getElementById('sumEntrega');
-  if (sc) sc.textContent = fmt;
-  if (se) se.textContent = fmt;
-  document.getElementById('sumTotal').textContent = 'R$ 49,99';
-  document.getElementById('pixTotal').textContent = 'R$ 49,99';
-}
-
-function goStep(n) {
-  [1,2,3].forEach(i => document.getElementById('step'+i).style.display = i===n ? 'block' : 'none');
-  document.getElementById('stepSuccess').style.display = 'none';
-  ['tab1','tab2','tab3'].forEach((id,idx) => {
-    const t = document.getElementById(id);
-    t.classList.remove('active','done');
-    if (idx+1 < n) t.classList.add('done');
-    if (idx+1 === n) t.classList.add('active');
-  });
-  if (n === 3) gerarPix();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function validateStep2() {
-  const req = ['nome','cpf','email','telefone','cep','rua','numero','bairro','cidade'];
-  let ok = true;
-  req.forEach(id => {
-    const el = document.getElementById(id);
-    if (!el.value.trim()) { el.classList.add('error'); ok = false; }
-    else el.classList.remove('error');
-  });
-  const em = document.getElementById('email');
-  if (em.value && !/\S+@\S+\.\S+/.test(em.value)) { em.classList.add('error'); ok = false; }
-  if (!ok) { document.querySelector('.field input.error')?.scrollIntoView({behavior:'smooth',block:'center'}); return; }
-
-  const parts = [
-    document.getElementById('rua').value,
-    document.getElementById('numero').value,
-    document.getElementById('complemento').value,
-    document.getElementById('bairro').value,
-    document.getElementById('cidade').value + (document.getElementById('uf').value ? ' - '+document.getElementById('uf').value : '')
-  ].filter(Boolean);
-  const el = document.getElementById('sumAddr');
-  el.textContent = parts.join(', '); el.classList.remove('pending');
-  goStep(3);
-}
-
-function buscarCEP(input) {
-  let v = input.value.replace(/\D/g,'');
-  if (v.length > 5) v = v.slice(0,5)+'-'+v.slice(5,8);
-  input.value = v;
-  if (v.replace('-','').length === 8) {
-    fetch('https://viacep.com.br/ws/'+v.replace('-','')+'/json/')
-      .then(r=>r.json()).then(d=>{
-        if (d.erro) return;
-        if (d.logradouro) document.getElementById('rua').value = d.logradouro;
-        if (d.bairro) document.getElementById('bairro').value = d.bairro;
-        if (d.localidade) document.getElementById('cidade').value = d.localidade;
-        if (d.uf) document.getElementById('uf').value = d.uf;
-      }).catch(()=>{});
-  }
-}
-
-document.getElementById('cpf').addEventListener('input', function() {
-  let v = this.value.replace(/\D/g,'').slice(0,11);
-  if (v.length > 9) v = v.slice(0,3)+'.'+v.slice(3,6)+'.'+v.slice(6,9)+'-'+v.slice(9);
-  else if (v.length > 6) v = v.slice(0,3)+'.'+v.slice(3,6)+'.'+v.slice(6);
-  else if (v.length > 3) v = v.slice(0,3)+'.'+v.slice(3);
-  this.value = v;
-});
-
-document.getElementById('telefone').addEventListener('input', function() {
-  let v = this.value.replace(/\D/g,'').slice(0,11);
-  if (v.length > 6) v = '('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);
-  else if (v.length > 2) v = '('+v.slice(0,2)+') '+v.slice(2);
-  this.value = v;
-});
-
-let pixCopiaColaValue = '';
-function copyPix() {
-  if (!pixCopiaColaValue) return;
-  navigator.clipboard.writeText(pixCopiaColaValue).then(() => {
-    const btn = document.getElementById('btnCopy');
-    btn.textContent = '✅ Código copiado!';
-    setTimeout(() => btn.textContent = '📋 Copiar código Pix', 2500);
-  }).catch(() => {
-    const el = document.getElementById('pixCopiaCola');
-    el.style.userSelect = 'all';
-    el.focus && el.focus();
-  });
-}
-
-let timerInterval;
-function startTimer(totalSeconds) {
-  clearInterval(timerInterval);
-  let secs = totalSeconds || 86400;
-  function fmt() {
-    const h = Math.floor(secs/3600), m = Math.floor((secs%3600)/60), s = secs%60;
-    return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
-  }
-  document.getElementById('countdown').textContent = fmt();
-  timerInterval = setInterval(() => {
-    secs--;
-    if (secs <= 0) { clearInterval(timerInterval); document.getElementById('countdown').textContent = '00:00:00'; return; }
-    document.getElementById('countdown').textContent = fmt();
-  }, 1000);
-}
-
-// ── MEDUSAPAY PIX INTEGRATION ──
-const API_URL = '/api/pix';
-
-async function gerarPix() {
-  const loading = document.getElementById('pixLoading');
-  const content_ = document.getElementById('pixContent');
-  const error = document.getElementById('pixError');
-
-  loading.style.display = 'block';
-  content_.style.display = 'none';
-  error.style.display = 'none';
-
-  const nome  = document.getElementById('nome').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const cpf   = document.getElementById('cpf').value.trim();
-
-  try {
-    const res = await fetch(API_URL + '?acao=gerar_pix', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        acao:  'gerar_pix',
-        valor: 49.99,
-        nome,
-        email,
-        cpf
-      })
+  // Size selection
+  document.querySelectorAll('.size-opt').forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      document.querySelectorAll('.size-opt').forEach(function(o) { o.classList.remove('sel'); });
+      this.classList.add('sel');
+      var r = this.querySelector('input');
+      r.checked = true;
+      state.sizePrice = parseInt(r.dataset.price);
+      state.sizeName = r.dataset.name;
+      var sc = document.getElementById('sumCacamba');
+      if (sc) sc.textContent = 'R$ ' + state.sizePrice.toLocaleString('pt-BR') + ' — na entrega';
+      document.getElementById('sumSize').textContent = state.sizeName;
     });
+  });
 
-    const data = await res.json();
-    loading.style.display = 'none';
+  // Period selection
+  document.querySelectorAll('.per-opt').forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      document.querySelectorAll('.per-opt').forEach(function(o) { o.classList.remove('sel'); });
+      this.classList.add('sel');
+      var r = this.querySelector('input');
+      r.checked = true;
+      state.periodDays = parseInt(r.value);
+      document.getElementById('sumPeriod').textContent = state.periodDays + ' dias';
+    });
+  });
 
-    if (!data.sucesso) {
-      document.getElementById('pixErrorMsg').textContent = data.erro || 'Erro desconhecido. Tente novamente.';
-      error.style.display = 'block';
+  // Date change
+  document.getElementById('deliveryDate').addEventListener('change', updateSumDate);
+  function updateSumDate() {
+    var v = document.getElementById('deliveryDate').value;
+    if (!v) return;
+    var parts = v.split('-');
+    var el = document.getElementById('sumDate');
+    el.textContent = parts[2] + '/' + parts[1] + '/' + parts[0];
+    el.classList.remove('pend');
+  }
+
+  // CEP mask + lookup
+  document.getElementById('cep').addEventListener('input', function() {
+    var v = this.value.replace(/\D/g, '');
+    if (v.length > 5) v = v.slice(0,5) + '-' + v.slice(5,8);
+    this.value = v;
+    if (v.replace('-','').length === 8) {
+      fetch('https://viacep.com.br/ws/' + v.replace('-','') + '/json/')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.erro) return;
+          if (data.logradouro) document.getElementById('rua').value = data.logradouro;
+          if (data.bairro) document.getElementById('bairro').value = data.bairro;
+          if (data.localidade) document.getElementById('cidade').value = data.localidade;
+          if (data.uf) document.getElementById('uf').value = data.uf;
+        }).catch(function(){});
+    }
+  });
+
+  // CPF mask
+  document.getElementById('cpf').addEventListener('input', function() {
+    var v = this.value.replace(/\D/g,'').slice(0,11);
+    if (v.length > 9) v = v.slice(0,3)+'.'+v.slice(3,6)+'.'+v.slice(6,9)+'-'+v.slice(9);
+    else if (v.length > 6) v = v.slice(0,3)+'.'+v.slice(3,6)+'.'+v.slice(6);
+    else if (v.length > 3) v = v.slice(0,3)+'.'+v.slice(3);
+    this.value = v;
+  });
+
+  // Phone mask
+  document.getElementById('telefone').addEventListener('input', function() {
+    var v = this.value.replace(/\D/g,'').slice(0,11);
+    if (v.length > 6) v = '('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);
+    else if (v.length > 2) v = '('+v.slice(0,2)+') '+v.slice(2);
+    this.value = v;
+  });
+
+  // NAVIGATION
+  document.getElementById('btnStep1').addEventListener('click', function() { goStep(2); });
+  document.getElementById('btnBack2').addEventListener('click', function() { goStep(1); });
+  document.getElementById('btnStep2').addEventListener('click', function() { validateStep2(); });
+  document.getElementById('btnBack3').addEventListener('click', function() { goStep(2); });
+  document.getElementById('btnConfirm').addEventListener('click', function() { confirmPayment(); });
+  document.getElementById('btnCopy').addEventListener('click', function() { copyPix(); });
+
+  function goStep(n) {
+    document.getElementById('step1').style.display = n === 1 ? 'block' : 'none';
+    document.getElementById('step2').style.display = n === 2 ? 'block' : 'none';
+    document.getElementById('step3').style.display = n === 3 ? 'block' : 'none';
+    document.getElementById('stepSuccess').style.display = 'none';
+    ['tab1','tab2','tab3'].forEach(function(id, idx) {
+      var t = document.getElementById(id);
+      t.classList.remove('active','done');
+      if (idx + 1 < n) t.classList.add('done');
+      if (idx + 1 === n) t.classList.add('active');
+    });
+    if (n === 3) gerarPix();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function validateStep2() {
+    var fields = ['nome','cpf','email','telefone','cep','rua','numero','bairro','cidade'];
+    var ok = true;
+    fields.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el.value.trim()) { el.classList.add('err'); ok = false; }
+      else el.classList.remove('err');
+    });
+    var em = document.getElementById('email');
+    if (em.value && !/\S+@\S+\.\S+/.test(em.value)) { em.classList.add('err'); ok = false; }
+    if (!ok) {
+      var first = document.querySelector('.err');
+      if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
-
-    // QR Code image (base64 from API)
-    const qrBase64 = data.qr_code;
-    const copiaCola = data.copia_cola;
-
-    if (qrBase64) {
-      const img = document.getElementById('pixQrImg');
-      // API may return pure base64 or data URL
-      img.src = qrBase64.startsWith('data:') ? qrBase64 : 'data:image/png;base64,' + qrBase64;
-      img.style.display = 'block';
-    }
-
-    if (copiaCola) {
-      pixCopiaColaValue = copiaCola;
-      document.getElementById('pixCopiaCola').textContent = copiaCola;
-    }
-
-    content_.style.display = 'block';
-    startTimer(86400); // 24h (expiresInDays: 1)
-
-  } catch (err) {
-    loading.style.display = 'none';
-    document.getElementById('pixErrorMsg').textContent = 'Falha de conexão com o servidor. Verifique se o arquivo api_pix_final.php está no mesmo diretório.';
-    error.style.display = 'block';
+    var parts = [
+      document.getElementById('rua').value,
+      document.getElementById('numero').value,
+      document.getElementById('complemento').value,
+      document.getElementById('bairro').value,
+      document.getElementById('cidade').value + (document.getElementById('uf').value ? ' - ' + document.getElementById('uf').value : '')
+    ].filter(Boolean);
+    var el = document.getElementById('sumAddr');
+    el.textContent = parts.join(', ');
+    el.classList.remove('pend');
+    goStep(3);
   }
-}
 
-function confirmPayment() {
-  clearInterval(timerInterval);
-  document.getElementById('step3').style.display = 'none';
-  document.getElementById('stepSuccess').style.display = 'block';
-  ['tab1','tab2','tab3'].forEach(id => {
-    document.getElementById(id).classList.remove('active');
-    document.getElementById(id).classList.add('done');
-  });
+  // PIX API
+  function gerarPix() {
+    var loading = document.getElementById('pixLoading');
+    var content = document.getElementById('pixContent');
+    var error = document.getElementById('pixError');
+    loading.style.display = 'block';
+    content.style.display = 'none';
+    error.style.display = 'none';
 
-  document.getElementById('orderNum').textContent = '#CF-' + Math.floor(100000 + Math.random()*900000);
+    var nome  = document.getElementById('nome').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var cpf   = document.getElementById('cpf').value.trim();
 
-  const dateRaw = document.getElementById('deliveryDate').value;
-  const dateStr = dateRaw ? dateRaw.split('-').reverse().join('/') : '—';
-  const addr = [
-    document.getElementById('rua').value, document.getElementById('numero').value,
-    document.getElementById('bairro').value, document.getElementById('cidade').value
-  ].filter(Boolean).join(', ') || '—';
-  
+    fetch('/api/pix', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ acao: 'gerar_pix', valor: 49.99, nome: nome, email: email, cpf: cpf })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      loading.style.display = 'none';
+      if (!data.sucesso) {
+        document.getElementById('pixErrMsg').textContent = data.erro || 'Erro desconhecido.';
+        error.style.display = 'block';
+        return;
+      }
+      if (data.qr_code) {
+        var img = document.getElementById('pixQrImg');
+        img.src = data.qr_code.startsWith('data:') ? data.qr_code : 'data:image/png;base64,' + data.qr_code;
+        img.style.display = 'block';
+      }
+      if (data.copia_cola) {
+        state.pixKey = data.copia_cola;
+        document.getElementById('pixKey').textContent = data.copia_cola;
+      }
+      content.style.display = 'block';
+      startTimer(86400);
+    })
+    .catch(function(err) {
+      loading.style.display = 'none';
+      document.getElementById('pixErrMsg').textContent = 'Falha de conexão. Verifique se api/pix.js está no servidor.';
+      error.style.display = 'block';
+    });
+  }
 
-  const sc = document.getElementById('successCacambaVal'); if(sc) sc.textContent = 'R$ ' + state.sizePrice.toLocaleString('pt-BR');
-  document.getElementById('successDetails').innerHTML =
-    `<strong>Caçamba:</strong> ${state.sizeName}<br>
-    <strong>Período:</strong> ${state.periodDays} dias<br>
-    <strong>Endereço de entrega:</strong> ${addr}<br>
-    <strong>Entrega prevista:</strong> ${dateStr}<br>
-    <strong>Taxa de entrega paga agora:</strong> R$ 49,99<br><strong>Locação da caçamba (na entrega):</strong> <span id='successCacambaVal'></span>`;
+  function copyPix() {
+    if (!state.pixKey) return;
+    navigator.clipboard.writeText(state.pixKey).then(function() {
+      var btn = document.getElementById('btnCopy');
+      btn.textContent = '✅ Copiado!';
+      setTimeout(function() { btn.textContent = '📋 Copiar código Pix'; }, 2500);
+    });
+  }
 
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+  function startTimer(secs) {
+    clearInterval(timerInterval);
+    function fmt() {
+      var h = Math.floor(secs/3600), m = Math.floor((secs%3600)/60), s = secs%60;
+      return pad(h)+':'+pad(m)+':'+pad(s);
+    }
+    function pad(n) { return String(n).padStart(2,'0'); }
+    document.getElementById('countdown').textContent = fmt();
+    timerInterval = setInterval(function() {
+      secs--;
+      if (secs <= 0) { clearInterval(timerInterval); document.getElementById('countdown').textContent = '00:00:00'; return; }
+      document.getElementById('countdown').textContent = fmt();
+    }, 1000);
+  }
 
-}); // end DOMContentLoaded
+  function confirmPayment() {
+    clearInterval(timerInterval);
+    document.getElementById('step3').style.display = 'none';
+    document.getElementById('stepSuccess').style.display = 'block';
+    ['tab1','tab2','tab3'].forEach(function(id) {
+      document.getElementById(id).classList.remove('active');
+      document.getElementById(id).classList.add('done');
+    });
+    document.getElementById('orderNum').textContent = '#CF-' + Math.floor(100000 + Math.random() * 900000);
+    var dateRaw = document.getElementById('deliveryDate').value;
+    var dateStr = dateRaw ? dateRaw.split('-').reverse().join('/') : '—';
+    var addr = [
+      document.getElementById('rua').value,
+      document.getElementById('numero').value,
+      document.getElementById('bairro').value,
+      document.getElementById('cidade').value
+    ].filter(Boolean).join(', ') || '—';
+    document.getElementById('successDetails').innerHTML =
+      '<strong>Caçamba:</strong> ' + state.sizeName + '<br>' +
+      '<strong>Período:</strong> ' + state.periodDays + ' dias<br>' +
+      '<strong>Endereço:</strong> ' + addr + '<br>' +
+      '<strong>Entrega prevista:</strong> ' + dateStr + '<br>' +
+      '<strong>Taxa de entrega paga:</strong> R$ 49,99<br>' +
+      '<strong>Locação da caçamba (na entrega):</strong> R$ ' + state.sizePrice.toLocaleString('pt-BR');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+})();
 </script>
 </body>
 </html>
