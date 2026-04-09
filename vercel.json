@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/pix.js": {
+      "runtime": "nodejs24.x"
+    }
+  }
+}
