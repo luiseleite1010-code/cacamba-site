@@ -380,7 +380,7 @@ footer{background:#1a1a1a;padding:28px 5%;display:flex;align-items:center;justif
           <p style="font-size:14px;color:var(--muted);margin-bottom:4px">Taxa de entrega — reserva do pedido</p>
           <div class="pix-timer">QR Code expira em: <span id="countdown">24:00:00</span></div>
           <div class="qr-box">
-            <div id="pixQrImg" style="width:170px;height:170px;border-radius:8px;display:none;background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#fff"></div>
+            <canvas id="pixQrCanvas" width="170" height="170" style="display:none;border-radius:8px"></canvas>
           </div>
           <div class="key-box">
             <div class="key-label">Pix Copia e Cola</div>
@@ -637,20 +637,26 @@ footer{background:#1a1a1a;padding:28px 5%;display:flex;align-items:center;justif
         error.style.display = 'block';
         return;
       }
-      // QR Code
+      // QR Code via canvas (evita ERR_INVALID_URL do Chrome)
       var qr = data.qr_code;
       if (qr && qr.length > 10) {
-        var qrEl = document.getElementById('pixQrImg');
-        var src = '';
-        if (qr.startsWith('data:image')) {
-          src = qr;
-        } else if (qr.startsWith('http')) {
-          src = qr;
-        } else {
-          src = 'data:image/png;base64,' + qr.replace(/[\s]/g, '');
-        }
-        qrEl.style.backgroundImage = 'url("' + src + '")';
-        qrEl.style.display = 'block';
+        var canvas = document.getElementById('pixQrCanvas');
+        var ctx = canvas.getContext('2d');
+        var tempImg = new Image();
+        var src = qr.startsWith('data:image') ? qr
+                : qr.startsWith('http') ? qr
+                : 'data:image/png;base64,' + qr.replace(/\s/g,'');
+        tempImg.onload = function() {
+          ctx.drawImage(tempImg, 0, 0, 170, 170);
+          canvas.style.display = 'block';
+        };
+        tempImg.onerror = function() {
+          // fallback: mostra mensagem
+          canvas.style.display = 'none';
+          document.getElementById('pixKey').parentElement.insertAdjacentHTML('beforebegin',
+            '<p style="color:#1565c0;font-size:13px;margin-bottom:8px">Use o código Pix Copia e Cola abaixo para pagar</p>');
+        };
+        tempImg.src = src;
       }
       // Copia e Cola
       var cc = data.copia_cola;
